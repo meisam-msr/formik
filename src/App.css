@@ -24,3 +24,6 @@ input {
 button {
   padding: 5px 15px;
 }
+.error{
+  color: red;
+}
