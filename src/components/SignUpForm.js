@@ -9,6 +9,7 @@ const SignUpform = () => {
       phoneNumber: "",
       password: "",
       passwordConfirm: "",
+      gender: "",
     },
     onSubmit: (values) => console.log(values),
     validationSchema: Yup.object({
@@ -31,31 +32,43 @@ const SignUpform = () => {
       passwordConfirm: Yup.string()
         .required("Password Confirmation is required")
         .oneOf([Yup.ref("password"), null], "Password must match"),
+      gender: Yup.string().required("Gender is required"),
     }),
     validateOnMount: true,
   });
-  console.log("form errors", formik.touched);
+  console.log("form errors", formik.values);
 
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
         <div className="formControl">
-          <label>Name</label>
-          <input type="text" {...formik.getFieldProps("name")} name="name" />
+          <label htmlFor="name">Name</label>
+          <input
+            id="name"
+            type="text"
+            {...formik.getFieldProps("name")}
+            name="name"
+          />
           {formik.errors.name && formik.touched.name && (
             <div className="error">{formik.errors.name}</div>
           )}
         </div>
         <div className="formControl">
-          <label>Email</label>
-          <input type="text" {...formik.getFieldProps("email")} name="email" />
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="text"
+            {...formik.getFieldProps("email")}
+            name="email"
+          />
           {formik.errors.email && formik.touched.email && (
             <div className="error">{formik.errors.email}</div>
           )}
         </div>
         <div className="formControl">
-          <label>Phone Number</label>
+          <label htmlFor="phoneNumber">Phone Number</label>
           <input
+            id="phoneNumber"
             type="text"
             {...formik.getFieldProps("phoneNumber")}
             name="phoneNumber"
@@ -65,8 +78,9 @@ const SignUpform = () => {
           )}
         </div>
         <div className="formControl">
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
+            id="password"
             type="password"
             {...formik.getFieldProps("password")}
             name="password"
@@ -76,8 +90,9 @@ const SignUpform = () => {
           )}
         </div>
         <div className="formControl">
-          <label>Password Confirmation</label>
+          <label htmlFor="passwordConfirm">Password Confirmation</label>
           <input
+            id="passwordConfirm"
             type="password"
             {...formik.getFieldProps("passwordConfirm")}
             name="passwordConfirm"
@@ -85,6 +100,26 @@ const SignUpform = () => {
           {formik.errors.passwordConfirm && formik.touched.passwordConfirm && (
             <div className="error">{formik.errors.passwordConfirm}</div>
           )}
+        </div>
+        <div className="formControl">
+          <input
+            type="radio"
+            id="0"
+            name="gender"
+            value="0"
+            onChange={formik.handleChange}
+            checked={formik.values.gender === "0"}
+          />
+          <label htmlFor="0">Male</label>
+          <input
+            type="radio"
+            id="1"
+            name="gender"
+            value="1"
+            onChange={formik.handleChange}
+            checked={formik.values.gender === "1"}
+          />
+          <label htmlFor="1">Female</label>
         </div>
         <button type="submit" disabled={!formik.isValid}>
           Submit
