@@ -32,6 +32,7 @@ const SignUpform = () => {
         .required("Password Confirmation is required")
         .oneOf([Yup.ref("password"), null], "Password must match"),
     }),
+    validateOnMount: true,
   });
   console.log("form errors", formik.touched);
 
@@ -85,7 +86,9 @@ const SignUpform = () => {
             <div className="error">{formik.errors.passwordConfirm}</div>
           )}
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={!formik.isValid}>
+          Submit
+        </button>
       </form>
     </div>
   );
