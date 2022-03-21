@@ -1,9 +1,21 @@
 import { useFormik } from "formik";
+import { useState } from "react";
 import * as Yup from "yup";
 
+const savedData = {
+  name: "meisam",
+  email: "marad12@gmail.com",
+  phoneNumber: "09125548701",
+  password: "Meisam@12",
+  passwordConfirm: "Meisam@12",
+  gender: "0",
+};
+
 const SignUpform = () => {
+  const [formValues, setFormValues] = useState(null);
+
   const formik = useFormik({
-    initialValues: {
+    initialValues: formValues || {
       name: "",
       email: "",
       phoneNumber: "",
@@ -35,6 +47,7 @@ const SignUpform = () => {
       gender: Yup.string().required("Gender is required"),
     }),
     validateOnMount: true,
+    enableReinitialize: true,
   });
   console.log("form errors", formik.values);
 
@@ -120,7 +133,11 @@ const SignUpform = () => {
             checked={formik.values.gender === "1"}
           />
           <label htmlFor="1">Female</label>
+          {formik.errors.gender && formik.touched.gender && (
+            <div className="error">{formik.errors.gender}</div>
+          )}
         </div>
+        <button onClick={() => setFormValues(savedData)}>Load data</button>
         <button type="submit" disabled={!formik.isValid}>
           Submit
         </button>
