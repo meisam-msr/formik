@@ -38,6 +38,7 @@ const SignUpform = () => {
       gender: "",
       nationality: "",
       interests: [],
+      terms: false,
     },
     onSubmit: (values) => console.log(values),
     validationSchema: Yup.object({
@@ -63,6 +64,9 @@ const SignUpform = () => {
       gender: Yup.string().required("Gender is required"),
       nationality: Yup.string().required("Select Nationality !"),
       interests: Yup.array().min(1).required("at least select one expertise"),
+      terms: Yup.boolean()
+        .required("The terms and conditions must be accepted")
+        .oneOf([true], "The terms and conditions must be accepted"),
     }),
     validateOnMount: true,
     enableReinitialize: true,
@@ -110,6 +114,18 @@ const SignUpform = () => {
           checkBoxOptions={checkBoxOptions}
           name="interests"
         />
+        <input
+          type="checkbox"
+          id="terms"
+          name="terms"
+          value={true}
+          onChange={formik.handleChange}
+          checked={formik.values.terms}
+        />
+        <label htmlFor="terms">Terms and Conditions</label>
+        {formik.errors.terms && formik.touched.terms && (
+          <div className="error">{formik.errors.terms}</div>
+        )}
         <button type="submit" disabled={!formik.isValid}>
           Submit
         </button>
