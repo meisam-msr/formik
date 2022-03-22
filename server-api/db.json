@@ -8,7 +8,8 @@
       "password": "Meisam@12",
       "passwordConfirm": "Meisam@12",
       "gender": "0",
-      "nationality": "IR"
+      "nationality": "IR",
+      "interests": []
     }
   ]
 }
