@@ -9,7 +9,8 @@
       "passwordConfirm": "Meisam@12",
       "gender": "0",
       "nationality": "IR",
-      "interests": []
+      "interests": [],
+      "terms": false
     }
   ]
 }
