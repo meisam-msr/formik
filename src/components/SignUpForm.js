@@ -2,9 +2,16 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
+import CheckBoxInput from "./common/CheckBoxInput";
 import Input from "./common/Input";
 import RadioInput from "./common/RadioInput";
 import Select from "./common/SelectComponent";
+
+const checkBoxOptions = [
+  { label: "React.js", value: "React.js" },
+  { label: "Vue.js", value: "Vue.js" },
+  { label: "Node.js", value: "Node.js" },
+];
 
 const radioOptions = [
   { label: "male", value: "0" },
@@ -30,6 +37,7 @@ const SignUpform = () => {
       passwordConfirm: "",
       gender: "",
       nationality: "",
+      interests: [],
     },
     onSubmit: (values) => console.log(values),
     validationSchema: Yup.object({
@@ -54,6 +62,7 @@ const SignUpform = () => {
         .oneOf([Yup.ref("password"), null], "Password must match"),
       gender: Yup.string().required("Gender is required"),
       nationality: Yup.string().required("Select Nationality !"),
+      interests: Yup.array().min(1).required("at least select one expertise"),
     }),
     validateOnMount: true,
     enableReinitialize: true,
@@ -95,6 +104,11 @@ const SignUpform = () => {
           selectOptions={selectOptions}
           name="nationality"
           formik={formik}
+        />
+        <CheckBoxInput
+          formik={formik}
+          checkBoxOptions={checkBoxOptions}
+          name="interests"
         />
         <button type="submit" disabled={!formik.isValid}>
           Submit
