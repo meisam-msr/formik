@@ -12,6 +12,7 @@ const CheckBoxInput = ({ name, formik, checkBoxOptions }) => {
             value={item.value}
             onChange={formik.handleChange}
             checked={formik.values[name].includes(item.value)}
+            onBlur={formik.handleBlur}
           />
           <label htmlFor={item.value}>{item.label}</label>
         </React.Fragment>
