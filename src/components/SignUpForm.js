@@ -40,7 +40,12 @@ const SignUpform = () => {
       interests: [],
       terms: false,
     },
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => {
+      axios
+        .post("http://localhost:3001/users", values)
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err));
+    },
     validationSchema: Yup.object({
       name: Yup.string()
         .required("Name is required")
