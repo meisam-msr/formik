@@ -2,6 +2,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
+import BooleancheckBox from "./common/BooleanCheckBox";
 import CheckBoxInput from "./common/CheckBoxInput";
 import Input from "./common/Input";
 import RadioInput from "./common/RadioInput";
@@ -76,7 +77,7 @@ const SignUpform = () => {
     validateOnMount: true,
     enableReinitialize: true,
   });
-  console.log("form errors", formik.values);
+  console.log("form errors", formik.errors);
 
   useEffect(() => {
     try {
@@ -115,22 +116,15 @@ const SignUpform = () => {
           formik={formik}
         />
         <CheckBoxInput
+          name="interests"
           formik={formik}
           checkBoxOptions={checkBoxOptions}
-          name="interests"
         />
-        <input
-          type="checkbox"
-          id="terms"
+        <BooleancheckBox
           name="terms"
-          value={true}
-          onChange={formik.handleChange}
-          checked={formik.values.terms}
+          formik={formik}
+          label="Terms and Conditions"
         />
-        <label htmlFor="terms">Terms and Conditions</label>
-        {formik.errors.terms && formik.touched.terms && (
-          <div className="error">{formik.errors.terms}</div>
-        )}
         <button type="submit" disabled={!formik.isValid}>
           Submit
         </button>
