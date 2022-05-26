@@ -2,9 +2,9 @@ import React from "react";
 
 const CheckBoxInput = ({ name, formik, checkBoxOptions }) => {
   return (
-    <div className="formControol">
+    <div className="formControl">
       {checkBoxOptions.map((item) => (
-        <React.Fragment key={item.value}>
+        <span key={item.value}>
           <input
             type="checkbox"
             id={item.value}
@@ -15,7 +15,7 @@ const CheckBoxInput = ({ name, formik, checkBoxOptions }) => {
             onBlur={formik.handleBlur}
           />
           <label htmlFor={item.value}>{item.label}</label>
-        </React.Fragment>
+        </span>
       ))}
       {formik.errors[name] && formik.touched[name] && (
         <div className="error">{formik.errors[name]}</div>

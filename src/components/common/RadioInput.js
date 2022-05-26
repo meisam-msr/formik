@@ -2,7 +2,7 @@ import React from "react";
 
 const RadioInput = ({ name, formik, radioOptions }) => {
   return (
-    <div className="formControol">
+    <div className="formControl">
       {radioOptions.map((item) => (
         <React.Fragment key={item.value}>
           <input
