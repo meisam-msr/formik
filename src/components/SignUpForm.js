@@ -11,7 +11,6 @@ import Select from "./common/SelectComponent";
 const checkBoxOptions = [
   { label: "React.js", value: "React.js" },
   { label: "Vue.js", value: "Vue.js" },
-  { label: "Node.js", value: "Node.js" },
 ];
 
 const radioOptions = [
@@ -82,7 +81,7 @@ const SignUpform = () => {
   useEffect(() => {
     try {
       const getData = async () => {
-        const { data } = await axios.get("http://localhost:3001/users/1");
+        const { data } = await axios.get("https://my-json-server.typicode.com/meisam-msr/formik-server-api/users/1");
         setFormValues(data);
       };
       getData();
@@ -92,7 +91,7 @@ const SignUpform = () => {
   }, []);
 
   return (
-    <div>
+    <div className="formContainer">
       <form onSubmit={formik.handleSubmit}>
         <Input formik={formik} name="name" label="Name" />
         <Input formik={formik} name="email" label="Email" />
